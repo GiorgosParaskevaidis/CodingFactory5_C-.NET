@@ -1,0 +1,49 @@
+﻿@page "/Customers/getall"
+@model FirstWebDBApp.Pages.Customers.IndexModel
+@{
+}
+
+<h2 class="text-center mb-4">Customers</h2>
+<a class="btn btn-primary btn-lg mb-4" href="/Customers/Create">New Customer</a>
+
+<table class="mx-auto table table-dark text-center">
+    <thead>
+        <tr><th colspan="4">Eshop Customers</th></tr>
+        <tr>
+            <th>Κωδικός</th>
+            <th>Όνομα</th>
+            <th>Επώνυμο</th>
+            <th>Ηλικία</th>
+            <th>Περιοχή</th>
+            <th>Edit/Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Customers!.Count != 0)
+        {
+            @foreach (var customer in Model.Customers)
+            {
+                <tr>
+                    <td>@customer.Id</td>
+                    <td>@customer.Firstname</td>
+                    <td>@customer.Lastname</td>
+                    <td>@customer.Age</td>
+                    <td>@customer.Region</td>
+                    <td>
+                        <a class="btn btn-primary" href="/Customers/@customer.Id/Update">Edit</a>
+                        <a class="btn btn-primary" href="javascript:void(0)" onclick="confirmDelete(@customer.Id)">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div>
+    @if (Model.ErrorObj is not null)
+    {
+        <p>@Model.ErrorObj.Message</p>
+    }
+</div>
+
+<script src="~/js/student.js"></script>
